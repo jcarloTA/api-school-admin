@@ -24,11 +24,15 @@ function deleteByStudentId(student_id) {
     return pool.query('DELETE FROM assigns WHERE student_id = ? ', student_id)
 }
 
+function deleteByGradeId(grade_id) {
+    return pool.query('DELETE FROM assigns WHERE grade_id = ? ', grade_id)
+}
 module.exports = {
     getAll,
     create,
     findByID,
     update,
     deleteE,
-    deleteByStudentId
+    deleteByStudentId,
+    deleteByGradeId
 }

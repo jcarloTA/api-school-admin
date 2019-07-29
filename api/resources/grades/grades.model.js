@@ -16,8 +16,12 @@ function update(grade, grade_id) {
     return pool.query('UPDATE grades SET ?  WHERE id = ?', [grade, grade_id])
 }
 
-function deleteE(student_id) {
-    return pool.query('DELETE FROM grades WHERE id = ? ', student_id)
+function deleteE(grade_id) {
+    return pool.query('DELETE FROM grades WHERE id = ? ', grade_id)
+}
+
+function deleteByTeacherId(teacher_id) {
+    return pool.query('DELETE FROM grades WHERE teacher_id = ? ', teacher_id)
 }
 
 module.exports = {
@@ -25,5 +29,6 @@ module.exports = {
     create,
     findByID,
     update,
-    deleteE
+    deleteE,
+    deleteByTeacherId
 }

@@ -24,6 +24,10 @@ function deleteAssign(assing_id) {
 function deleteByStudentId(student_id) {
     return assingsModel.deleteByStudentId(student_id)
 }
+function deleteByGradeId(grade_id) {
+    return assingsModel.deleteByGradeId(grade_id)
+}
+
 
 module.exports = {
     createAssing,
@@ -31,5 +35,6 @@ module.exports = {
     updateAssign,
     findAssignById,
     deleteAssign,
-    deleteByStudentId
+    deleteByStudentId,
+    deleteByGradeId
 }

@@ -20,10 +20,15 @@ function deleteGrade(grade_id) {
     return gradesModel.deleteE(grade_id)
 }
 
+function deleteGradeByTeacherId(teacher_id) {
+    return gradesModel.deleteByTeacherId(teacher_id)
+}
+
 module.exports = {
     createGrade,
     getGrades,
     updateGrade,
     findGradeById,
-    deleteGrade
+    deleteGrade,
+    deleteGradeByTeacherId
 }

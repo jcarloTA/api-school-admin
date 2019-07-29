@@ -30,7 +30,7 @@ assignsRouter.post('/', [jwtAuthenticate, validAssign], errorProcess( async( req
     }
     const searchGrade = await gradesController.findGradeById(grade_id);
     if(searchGrade.length == 0) {
-        throw new GradeNotExist(`El grado con id ${[student_id]} no existe`)
+        throw new GradeNotExist(`El grado con id ${[grade_id]} no existe`)
     }
 
     const result = await assignsController.createAssing(newAssign)
@@ -53,7 +53,7 @@ assignsRouter.put('/:id', [jwtAuthenticate, validAssign], errorProcess( async (r
 
     const searchGrade = await gradesController.findGradeById(grade_id);
     if(searchGrade.length == 0) {
-        throw new GradeNotExist(`El grado con id ${[student_id]} no existe`)
+        throw new GradeNotExist(`El grado con id ${[grade_id]} no existe`)
     }
 
     const result = await assignsController.updateAssign(newAssign, assign_id)

@@ -5,6 +5,7 @@ const log = require('./../../../utils/logger')
 
 const errorProcess = require('./../../libs/handleError').errorsProcess
 const gradesController = require('./grades.controller')
+const assignsController = require('./../assigns/assigns.controller')
 const teacherController = require('./../teacher/teacher.controller')
 const { TeacherNotExist } = require('./../teacher/teacher.error')
 
@@ -53,7 +54,7 @@ gradesRouter.put('/:id', [jwtAuthenticate, validGrade], errorProcess( async(req,
     const grades = await gradesController.findGradeById(grade_id)
     console.log('result', result)
     if(result.affectedRows == 0) {
-        throw new Error("Error al actualizar juego")
+        throw new Error("Error al actualizar grado")
     }
     res.status(201).json(grades[0])
 }))
@@ -65,7 +66,7 @@ gradesRouter.delete('/:id', jwtAuthenticate, errorProcess( async(req, res) => {
     if(gradeSearch.length == 0) {
         throw new GradeNotExist(`El grado con id ${[grade_id]} no existe`)
     } 
-
+    const deleAssign = await assignsController.deleteByGradeId(grade_id)
     const result = await gradesController.deleteGrade(grade_id)
     if(result.affectedRows == 0) {
         throw new Error("Error al borrar el grado")

@@ -5,6 +5,7 @@ const log = require('./../../../utils/logger')
 
 const errorProcess = require('./../../libs/handleError').errorsProcess
 const teacherController = require('./teacher.controller')
+const gradesController = require('./../grades/grades.controller')
 const { validTeacher } = require('./teacher.validate')
 const { TeacherNotExist } = require('./teacher.error')
 
@@ -21,7 +22,7 @@ teachersRouter.post('/', [jwtAuthenticate, validTeacher], errorProcess( async(re
     const teachers = await teacherController.findTeacherById(result.insertId)
     console.log('create student', result)
     if(!result.insertId) {
-        throw new Error("No se pudo crear el estudiante en la BD")
+        throw new Error("No se pudo crear el maestro en la BD")
     }
     res.status(201).json(teachers[0])
 }))
@@ -33,14 +34,14 @@ teachersRouter.put('/:id', [jwtAuthenticate, validTeacher], errorProcess( async 
     teacher_search = await teacherController.findTeacherById(teacher_id);
 
     if (teacher_search.length == 0) {
-        throw new TeacherNotExist(`El studiante con id [${teacher_id}] no existe`)
+        throw new TeacherNotExist(`El maestro con id [${teacher_id}] no existe`)
     }
     console.log('teacher upd',req.body, teacher_id)
     const update = await teacherController.updateTeacher(req.body,teacher_id)
     if(update.affectedRows == 0) {
-        throw new Error("Error al actualizar el estudiante")
+        throw new Error("Error al actualizar el maestro")
     }
-    res.status(200).send('estudiante actualizado con exito')
+    res.status(200).send('maestro actualizado con exito')
     
 }))
 
@@ -51,14 +52,15 @@ teachersRouter.delete('/:id', jwtAuthenticate, errorProcess( async(req,res) => {
     teacher_search = await teacherController.findTeacherById(teacher_id);
 
     if (teacher_search.length == 0) {
-        throw new StudentNotExist(`El estudiante con id [${teacher_id}] no existe`)
+        throw new TeacherNotExist(`El maestro con id [${teacher_id}] no existe`)
     }
 
+    const resultGrades = await gradesController.deleteGradeByTeacherId(teacher_id)
     const result = await teacherController.deleteTeacher(teacher_id)
     if(result.affectedRows == 0) {
-        throw new Error("Error al borrar el estudiante")
+        throw new Error("Error al borrar el maestro")
     }
-    res.status(200).send('estudiante eliminado con exito')
+    res.status(200).send('maestro eliminado con exito')
 
 }))
 
