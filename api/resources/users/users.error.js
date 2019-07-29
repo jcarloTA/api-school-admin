@@ -12,7 +12,7 @@ class DataAlreadyInUse extends Error {
 class IncorrectCredentials extends Error {
     constructor(message) {
         super(message)
-        this.message = message || 'Credenciales incorrectas. Asegurate que el username y contrasena sean correctas'
+        this.message = message || 'Credenciales incorrectas. Asegurate que el email y contrasena sean correctas'
         this.status = 400
         this.name = "Credenciales"
     }

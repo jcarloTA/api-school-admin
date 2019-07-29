@@ -8,6 +8,10 @@ function getAll() {
     return pool.query('SELECT id, student_id, grade_id, section FROM assigns')
 }
 
+function getAllWithNames() {
+    return pool.query('SELECT assigns.id, assigns.section, assigns.student_id, assigns.grade_id, grades.name AS grade_name, students.name AS student_name FROM assigns INNER JOIN grades ON grades.id = assigns.grade_id INNER JOIN students ON students.id = assigns.student_id')
+}
+
 function findByID(id) {
     return pool.query('SELECT id, student_id, grade_id, section FROM assigns WHERE id = ?', id) 
 }
@@ -34,5 +38,7 @@ module.exports = {
     update,
     deleteE,
     deleteByStudentId,
-    deleteByGradeId
+    deleteByGradeId,
+    getAllWithNames
+
 }

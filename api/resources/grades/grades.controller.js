@@ -5,7 +5,7 @@ function createGrade(grade) {
 }
 
 function getGrades( ) {
-    return gradesModel.getAll()
+    return gradesModel.getAllWithTeacherName()
 }
 
 function updateGrade(grade, grade_id) {

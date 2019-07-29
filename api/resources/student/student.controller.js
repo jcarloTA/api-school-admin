@@ -9,6 +9,10 @@ function getStudents( ) {
     return studentModel.getAll()
 }
 
+function getStudentById(student_id) {
+    return studentModel.getById(student_id)
+}
+
 function updateStudent(student, student_id) {
     return studentModel.update(student, student_id)
 }
@@ -25,5 +29,6 @@ module.exports = {
     getStudents,
     updateStudent,
     findStudentById,
-    deleteStudent
+    deleteStudent,
+    getStudentById
 }

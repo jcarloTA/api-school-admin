@@ -20,6 +20,13 @@ assignsRouter.get('/', jwtAuthenticate, errorProcess( async(req, res) => {
     res.status(200).send({assigns})
 }))
 
+assignsRouter.get('/:id', jwtAuthenticate, errorProcess( async(req, res) => {
+    const assign_id = req.params.id
+
+    const assigns = await assignsController.findAssignById(assign_id)
+    res.status(200).send({assign:assigns[0]})
+}))
+
 assignsRouter.post('/', [jwtAuthenticate, validAssign], errorProcess( async( req, res) => {
     const newAssign = req.body;
     const {student_id, grade_id} = newAssign;

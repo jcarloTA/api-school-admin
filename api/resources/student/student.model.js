@@ -8,6 +8,10 @@ function getAll() {
     return pool.query('SELECT id, name, lastname, gender, birthdate FROM students')
 }
 
+function getById() {
+    return pool.query('SELECT id, name, lastname, gender, birthdate FROM students')
+}
+
 function findByID(id) {
     return pool.query('SELECT id, name, lastname, gender, birthdate FROM students WHERE id = ?', id) 
 }
@@ -25,5 +29,6 @@ module.exports = {
     create,
     findByID,
     update,
-    deleteE
+    deleteE,
+    getById,
 }

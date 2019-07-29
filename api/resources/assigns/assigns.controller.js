@@ -6,7 +6,7 @@ function createAssing(assign) {
 }
 
 function getAssigns( ) {
-    return assingsModel.getAll()
+    return assingsModel.getAllWithNames()
 }
 
 function updateAssign(assign, assign_id) {

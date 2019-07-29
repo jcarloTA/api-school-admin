@@ -17,6 +17,13 @@ teachersRouter.get('/', jwtAuthenticate, errorProcess( async(req, res) => {
     res.status(200).send({teachers})
 }))
 
+teachersRouter.get('/:id', jwtAuthenticate, errorProcess( async(req, res) => {
+    let teacher_id =  parseInt(req.params.id);
+
+    const teachers = await teacherController.findTeacherById(teacher_id)
+    res.status(200).send({teacher:teachers[0]})
+}))
+
 teachersRouter.post('/', [jwtAuthenticate, validTeacher], errorProcess( async(req, res) => {
     const result = await teacherController.createTeacher(req.body)
     const teachers = await teacherController.findTeacherById(result.insertId)

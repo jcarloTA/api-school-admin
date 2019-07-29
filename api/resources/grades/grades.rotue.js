@@ -19,6 +19,12 @@ gradesRouter.get('/', jwtAuthenticate, errorProcess( async(req, res) => {
     const grades = await gradesController.getGrades();
     res.status(200).send({grades})
 }))
+gradesRouter.get('/:id', jwtAuthenticate, errorProcess( async(req, res) => {
+    const grade_id  = req.params.id
+
+    const grades = await gradesController.findGradeById(grade_id);
+    res.status(200).send({grade: grades[0]})
+}))
 
 gradesRouter.post('/', [jwtAuthenticate, validGrade], errorProcess( async(req, res) => {
     const { teacher_id } = req.body

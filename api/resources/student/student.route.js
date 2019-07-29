@@ -18,6 +18,12 @@ studentsRouter.get('/', jwtAuthenticate, errorProcess(async (req, res) => {
     res.status(200).send({students})
 }))
 
+studentsRouter.get('/:id', jwtAuthenticate, errorProcess(async (req, res) => {
+    let student_id =  parseInt(req.params.id);
+    const students = await studentsController.findStudentById(student_id)
+    res.status(200).send({student: students[0]})
+}))
+
 studentsRouter.post('/', [ validStudent , jwtAuthenticate], errorProcess( async (req, res) => {
     const result = await studentsController.createStudent(req.body)
     const students = await studentsController.findStudentById(result.insertId)
